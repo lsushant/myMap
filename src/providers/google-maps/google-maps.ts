@@ -14,7 +14,7 @@ export class GoogleMaps {
   mapLoaded: any;
   mapLoadedObserver: any;
   markers: any = [];
-  apiKey: string='AIzaSyDI82P1WieOuHk_ubl2hBbcNCPC4kkaw2E';
+  apiKey: string='';
   errorMessage: string;
   places =[];
  
@@ -191,11 +191,11 @@ export class GoogleMaps {
   }
 // Add nearby places  
   addNearbyplaces(JsonPayload:any ){
-    this.restapi.getNearByScreen(JsonPayload)
+    this.restapi.getAllScreen()
             .subscribe(
               places => {
                 this.places = places;
-                console.log(this.places );
+               alert(this.places );
                 var i=0;
                 this.addMarker(18.520430,73.856743);
                 // for(i=0;i<this.places.length;i++) {

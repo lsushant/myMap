@@ -1,0 +1,26 @@
+
+
+<ion-header>
+  <ion-row>
+    <ion-col class="no-padding">
+      <ion-searchbar [(ngModel)]="hotellocation" (ionInput)="getItems($event)" (ionCancel)="showItems = !showItems"
+        autocomplete="on" autocorrect="on" spellcheck="true" animated="true" placeholder="Destination or address..."></ion-searchbar>
+      <ion-list class="searchbar-results animated fadeIn" *ngIf="showItems">
+        <button ion-item *ngFor="let item of items" tappable (click)="itemSelected(item)">
+          <ion-icon name="pin"></ion-icon>
+          {{ item }}
+        </button>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-navbar color="primary">
+    <ion-title>Screen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content >
+  <ion-tabs >
+    <ion-tab [root]="tab1Root" tabTitle="Map" tabIcon="navigate"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="List" tabIcon="list"></ion-tab>
+  </ion-tabs>
+</ion-content>

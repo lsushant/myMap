@@ -14,7 +14,7 @@ export class GoogleMaps {
   mapLoaded: any;
   mapLoadedObserver: any;
   markers: any = [];
-  apiKey: string='';
+  apiKey: string='AIzaSyDI82P1WieOuHk_ubl2hBbcNCPC4kkaw2E';
   errorMessage: string;
   places =[];
  
@@ -91,7 +91,7 @@ export class GoogleMaps {
  
       this.geolocation.getCurrentPosition().then((position) => {
 
-        console.log(position.coords.latitude);
+        
 
         // UNCOMMENT FOR NORMAL USE
         //let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -106,15 +106,15 @@ export class GoogleMaps {
         this.map = new google.maps.Map(this.mapElement, mapOptions);
         
 
-        var marker = new google.maps.Marker({
-          map: this.map,
-          position: latLng ,
-        title: "kiran"
-      });
+      //   var marker = new google.maps.Marker({
+      //     map: this.map,
+      //     position: latLng ,
+      //   title: "kiran"
+      // });
 
       var JsonPayload={
-        "lat":position.coords.latitude,
-        "long":position.coords.longitude,
+        "latitude":position.coords.latitude,
+        "longitude":position.coords.longitude,
         "radius":3000
       }
       this.addNearbyplaces(JsonPayload);
@@ -191,18 +191,15 @@ export class GoogleMaps {
   }
 // Add nearby places  
   addNearbyplaces(JsonPayload:any ){
-    this.restapi.getAllScreen()
+    this.restapi.getNearByScreen (JsonPayload)
             .subscribe(
               places => {
                 this.places = places;
-               alert(this.places );
-                var i=0;
-                this.addMarker(18.520430,73.856743);
-                // for(i=0;i<this.places.length;i++) {
-                //   console.log(this.places[i].lattitude);
-                //   console.log(this.places[i].longitude);
-                //   this.addMarker(this.places[i].lattitude,this.places[i].longitude);
-                // }
+              
+                for(var i=0;i<this.places.length;i++) {
+                                   
+                  this.addMarker(this.places[i].lattitude,this.places[i].longitude);
+                }
                
                   }
               

@@ -47,18 +47,19 @@ export class RestApiServiceProvider {
   getNearByScreen (jsonPayload:any): Observable<any> {
     var headers = new Headers();
 
-    headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+ 
+  
     headers.append('Accept','application/json');
     headers.append('content-type','application/json');
-    headers.append('Access-Control-Allow-Origin', 'http://localhost:8080');
+    headers.append('Access-Control-Allow-Credentials' , "true");
+
+    
    
-    headers.append('client-id','JamesBond');
+   headers.append('client-id','JamesBond');
     headers.append('client-secret','777898');
-  
- 
+
      let options = new RequestOptions({ headers:headers});
-    return this.http.post( "http://116.203.71.189:3100/get_screens_by_radius",jsonPayload,options).pipe(
+    return this.http.post( "http://116.203.71.189:3100/get_screens_by_radius", jsonPayload,options).pipe(
       map( this.extractData ),
       catchError( this.handleError )
     );
